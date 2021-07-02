@@ -67,11 +67,11 @@
 				<span class="d-xl-none d-lg-none d-md-inline d-sm-inline d-inline  p-1 navslidemenu">
 					<i class="icofont-navigation-menu"></i>
 				</span>
-				<img src="logo/logo_big.jpg" class="img-fluid d-xl-inline d-lg-inline d-md-none d-sm-none d-none">
+				<img src="image/logo/logo1.png" class="img-fluid d-xl-inline d-lg-inline d-md-none d-sm-none d-none">
 
-				<img src="logo/logo_med.jpg" class="img-fluid d-xl-none d-lg-none d-md-inline d-sm-none d-none" style="width: 100px">
+				<img src="imgae/logo/logo1.png" class="img-fluid d-xl-none d-lg-none d-md-inline d-sm-none d-none" style="width: 100px">
 
-				<img src="logo/logo.jpg" class="img-fluid d-xl-none d-lg-none d-md-none d-sm-inline d-inline pl-2" style="width: 30px">
+				<img src="image/logo/logo1.png" class="img-fluid d-xl-none d-lg-none d-md-none d-sm-inline d-inline pl-2" style="width: 30px">
 			</div>
 			
 			<!-- Search Bar -->
@@ -111,6 +111,7 @@
 					<?php }?>
 				</div>
 			</div>
+		</div>
 			
 			<!-- Shopping-cart -->
 			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 order-xl-3 order-lg-3 order-md-4 order-sm-4 order-4 text-right">
@@ -133,7 +134,7 @@
 
 				<!-- App Download -->
 
-				<img src="image/download.png" class="img-fluid d-xl-inline d-lg-inline d-md-none d-sm-none d-none" style="width: 150px">
+				<img src="image/logo/download.jpeg" class="img-fluid d-xl-inline d-lg-inline d-md-none d-sm-none d-none" style="width: 100px">
 			</div>
 		</div>
 	</div>
@@ -351,7 +352,7 @@
 			<a href="#"> Cart [ <span class="cartNoti"> 1 </span> ]  </a>
 			<hr>
 
-			<img src="image/download.png" class="img-fluid ml-2 text-center" style="width: 150px">
+			<img src="frontend/image/download.png" class="img-fluid ml-2 text-center" style="width: 150px">
 			<hr>
 
 			<p class="text-white ml-3"> Copyright &copy; <img src="../logo/logo_wh_transparent.png" style="width: 20px; height: 20px"> 2019  </p>

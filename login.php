@@ -29,12 +29,22 @@
 							</div> 
 						<?php }unset($_SESSION['login_fail']);
 
-						if(isset($_SESSION['login_successful'])){ ?>
+						if(isset($_SESSION['reg_fail'])){ ?>
 
 							<div class="alert alert-danger d-flex align-items-center" role="alert">
 							 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
 							  <div>
-							    <?= $_SESSION['login_fail']; ?>
+							    <?= $_SESSION['reg_fail']; ?>
+							  </div>
+							</div> 
+						<?php }
+
+						if(isset($_SESSION['reg_success'])){ ?>
+
+							<div class="alert alert-secondary d-flex align-items-center" role="alert">
+							 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+							  <div>
+							    <?= $_SESSION['reg_success']; ?>
 							  </div>
 							</div> 
 						<?php } ?>

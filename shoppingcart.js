@@ -111,14 +111,17 @@ $(document).ready(function(){
 
 					shoppingcartData += `<tr> 
 											<td> 
-												<button class="btn btn-outline-danger remove_btn btn-sm" data-id="${i}" style="border-radius: 50%"> 
-													<i class="icofont-close-line"></i> 
+												
+												<button class="btn btn-outline-danger remove btn-sm" style="border-radius: 50%" data-id="${i}"> 
+													<i class="icofont-close-line"></i>
 												</button>
 											</td>
 											<td> 
 												<img src="${photo}" class="cartImg">
 											</td>
 											<td>
+												
+												
 												<p> ${name} </p>
 												<p> ${codeno} </p>
 											</td>
@@ -216,7 +219,28 @@ $(document).ready(function(){
 		showTable();
 
 	});
-$('.checkoutbtn').on('click',function(){
+
+	//Remove item
+	$('#shoppingcart_table').on('click', '.remove', function(){
+		var id = $(this).data('id');
+		var cart = localStorage.getItem('cart');
+		var cartArray = JSON.parse(cart);
+
+		$.each(cartArray, function(i,v){
+			if (id == i) {
+					cartArray.splice(id,1);
+			}
+		});
+
+		var cartData = JSON.stringify(cartArray);
+		localStorage.setItem('cart', cartData);
+
+		cartNoti();
+		showTable();
+
+	});
+
+	$('.checkoutbtn').on('click',function(){
 		var notes = $('#notes').val();
 		var cart = localStorage.getItem('cart');
 		var cartArray = JSON.parse(cart);
@@ -239,6 +263,11 @@ $('.checkoutbtn').on('click',function(){
 			cart:cartArray,
 			note:notes,
 			total:total
+		},function(response){
+			localStorage.clear();
+			location.href="ordersuccess.php";
 		});
+
 });
+
 	});

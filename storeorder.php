@@ -49,6 +49,7 @@
 	$statement->execute();
 	}
 
-	var_dump($voucherno)
+	$rows=$statement->rowCount();
+	return $rows;
 
 ?> 

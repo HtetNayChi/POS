@@ -1,6 +1,7 @@
 <?php
 
 	require'connection.php';
+	session_start();
 	$name=$_POST['name'];
 	$phone=$_POST['phone'];
 	$email=$_POST['email'];
@@ -23,6 +24,7 @@
 	$statement->bindParam(':status',$status);
 	$statement->execute();
 
+	if($statement){
 	$sql='SELECT * FROM users ORDER By id DESC';
 	$statement=$pdo->prepare($sql);
 	$statement->execute();
@@ -36,7 +38,8 @@
 	$statement->bindParam(':user',$userid);
 	$statement->bindParam(':role',$roleid);
 	$statement->execute();
-
+	$_SESSION['reg_success']="You have successfully registered. 😇😇 ";
 	header('location:login.php');
+	}
 
 ?>

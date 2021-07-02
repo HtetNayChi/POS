@@ -47,7 +47,7 @@
         <!-- Navbar-->
         <header class="app-header">
             <a class="app-header__logo" href="index.html">
-                <img src="../logo/logo_wh_transparent.png" style="width: 50px; height: 50px">
+                <img src="image/logo/logo.png" style="width: 30px; height: 30px ; margin-right: 10px;">
                 Shopules
             </a>
             
@@ -92,17 +92,24 @@
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 
         <aside class="app-sidebar">
-            <div class="app-sidebar__user">
-                <div>
-                  <p class="app-sidebar__user-name"><?= $_SESSION['login_user']['name']; ?></p>
-                  <p class="app-sidebar__user-designation"><?= $_SESSION['login_user']['rname']; ?></p>
-                </div>
-            </div>
-            
+            <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+                <aside class="app-sidebar">
+                  <div class="app-sidebar__user">
+                    <img class="app-sidebar__user-avatar" src="<?= $_SESSION['login_user']['profile']; ?>" width="50" height="45" alt="User Image">
+                    <div>
+                     <a href="user_detail.php?id=<?= $_SESSION['login_user']['id']; ?>" class="app-sidebar__user-name"><?= $_SESSION['login_user']['name']; ?></a>
+                    <p class="app-sidebar__user-designation"><?= $_SESSION['login_user']['rname']; ?></p>
+                    
+                    </div>
+
+                  </div>
+                
+
+          
             <ul class="app-menu">
                 
                 <li>
-                    <a class="app-menu__item" href="backend/dashboard.html">
+                    <a class="app-menu__item" href="dashboard.php">
                         <i class="app-menu__icon icofont-dashboard"></i>
                         <span class="app-menu__label">
                             Dashboard
@@ -166,6 +173,7 @@
             
                 
             </ul>
+            </aside>
         </aside>
 
 

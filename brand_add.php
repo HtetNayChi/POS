@@ -6,7 +6,7 @@
 	//image/category/cat.jpg
 
 	//var_dump($photo);
-	$source_dir='image/category/';
+	$source_dir='image/brand/';
 
 	// Changing the file name into random 
 

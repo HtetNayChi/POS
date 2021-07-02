@@ -59,7 +59,7 @@
                                                         $cname = $s_category['name'];
                                             
                                                        ?> 
-                                        <option selected ><?= $cname;}?></option>
+                                        <option selected value="<?=$cid?>"><?= $cname;}?></option>
                                           <?php 
                                                 foreach($categories as $category){
                                                     $c_id=$category['id'];

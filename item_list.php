@@ -1,10 +1,13 @@
 <?php
     require 'backendheader.php';
     require 'connection.php';
-    $sql ="SELECT i.id,i.codeno, i.name, i.photo, i.price, i.discount, i.description,b.brand_id,b.brand_name, s.sub_id ,s.sub_name FROM items i, brands b,subcategories s
-    WHERE  i.brand_id= b.brand_id 
-    AND i.subcategory_id=s.sub_id
-     ORDER By s.sub_name";
+
+    $sql ="SELECT i.id,i.codeno, i.name, i.photo, i.price, i.discount, i.description,b.brand_id,b.brand_name, s.sub_id ,s.sub_name 
+        FROM items i, brands b,subcategories s
+        WHERE  i.brand_id= b.brand_id 
+        AND i.subcategory_id=s.sub_id
+        ORDER By s.sub_name";
+
     $statement=$pdo->prepare($sql);
     $statement->execute();
     $items=$statement->fetchAll();

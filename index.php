@@ -17,12 +17,18 @@
 	$statement->execute();
 	$saleitems= $statement->fetchAll();
 
-	$randomSubcategoryid=8;
+	$randomSubcategoryid=20;
 	$sql = 'SELECT * FROM items Where subcategory_id=:value1 LIMIT 8';
 	$statement = $pdo->prepare($sql);
 	$statement->bindParam(':value1', $randomSubcategoryid);
 	$statement->execute();
 	$randomeitems = $statement->fetchAll();
+
+
+	$sql= 'SELECT * FROM brands order By rand() LIMIT 8';
+	$statement=$pdo->prepare($sql);
+	$statement->execute();
+	$brands= $statement->fetchAll();
  ?>
 
 
@@ -95,13 +101,16 @@
 		            	?>
 		                <div class="item">
 		                    <div class="pad15">
-		                    	<img src="<?= $di_photo ?>" class="img-fluid">
+		                    	<a href="item_detail.php?id=<?=$di_id?>" class=" text-decoration-none text-dark">
+		                    		
+		                    		<img src="<?= $di_photo ?>" class="img-fluid ">
+		                    	
 		                        <p class="text-truncate"><?= $di_name ?></p>
 		                        <p class="item-price">
 		                        	<strike><?= $di_price ?> KS </strike> 
 		                        	<span class="d-block"><?= $di_discount ?> KS</span>
 		                        </p>
-
+		                        
 		                        <div class="star-rating">
 									<ul class="list-inline">
 										<li class="list-inline-item"><i class='bx bxs-star' ></i></li>
@@ -111,9 +120,11 @@
 										<li class="list-inline-item"><i class='bx bxs-star-half' ></i></li>
 									</ul>
 								</div>
+								
 
-								<a href="#" class="addtocartBtn text-decoration-none" data-id="<?= $di_id ?>" data-name="<?= $di_name?>" data-price="<?= $di_price?>" data-discount="<?=$di_discount ?>" data-photo="<?= $di_photo ?>" data-codeno="<?=$di_codeno?>" >Add to Cart</a>
 
+								<a href="cart.php" class="addtocartBtn  text-decoration-none"data-id="<?= $di_id ?>" data-name="<?= $di_name?>" data-price="<?= $di_price?>" data-discount="<?=$di_discount ?>" data-photo="<?= $di_photo ?>" data-codeno="<?=$di_codeno?>">Add to Cart</a>
+								</a>
 		                    </div>
 		                </div>
 		                <?php } ?>
@@ -147,7 +158,7 @@
 						?>
 		                <div class="item">
 		                    <div class="pad15">
-		                    	<img src="<?= $si_photo?>" class="img-fluid">
+		                    	<img src="<?= $si_photo?>" class="img-fluid w-100 " width="200" height="70">
 		                        <p class="text-truncate"><?= $si_name?></p>
 		                        <p class="item-price">
 		                        	<?php 
@@ -171,7 +182,7 @@
 									</ul>
 								</div>
 
-								<a href="#" class="addtocartBtn text-decoration-none" data-id="<?= $si_id ?>" data-name="<?= $si_name?>" data-price="<?= $si_price?>" data-discount="<?=$si_discount ?>" data-photo="<?= $si_photo ?>" data-codeno="<?=$si_codeno?>" >Add to Cart</a>
+								<a href="cart.php" class="addtocartBtn  text-decoration-none"data-id="<?= $si_id ?>" data-name="<?= $si_name?>" data-price="<?= $si_price?>" data-discount="<?=$si_discount ?>" data-photo="<?= $si_photo ?>" data-codeno="<?=$si_codeno?>">Add to Cart</a>
 
 		                    </div>
 		                </div>
@@ -208,7 +219,7 @@
 		                <div class="item">
 		                    <div class="pad15">
 		                    	<img src="<?= $ri_photo ?>" class="img-fluid">
-		                        <p class="text-truncate">Multi Item Carousel</p>
+		                        <p class="text-truncate"><?= $ri_name ?></p>
 		                        <p class="text-truncate">
 		                        	<?php if($ri_discount){?>
 		                        		<strike><?= $ri_price ?> Ks	</strike>
@@ -253,59 +264,21 @@
 
 	    <!-- Brand Store Item -->
 	    <section class="customer-logos slider mt-5">
+	    	<?php 
+				foreach($brands as $brand){
+					$randombrand_id=$brand['brand_id'];
+					$randombrand_photo=$brand['logo'];
+				
+			?>
 	      	<div class="slide">
 	      		<a href="">
-		      		<img src="image/brand/loacker_logo.jpg">
+		      		<img src="<?= $randombrand_photo?>" class="img-fluid">
 		      	</a>
 	      	</div>
+	      	<?php }?>
 	      	
-	      	<div class="slide">
-	      		<a href="">
-	      			<img src="image/brand/lockandlock_logo.png">
-	      		</a>
-	      	</div>
 	      	
-	      	<div class="slide">
-	      		<a href="">
-	      			<img src="image/brand/apple_logo.png">
-	      		</a>
-	      	</div>
-	      	
-	      	<div class="slide">
-	      		<a href="">
-	      			<img src="image/brand/giordano_logo.png">
-	      		</a>
-	      	</div>
-	      	
-	      	<div class="slide">
-	      		<a href="">
-	      			<img src="image/brand/saisai_logo.png">
-	      		</a>
-	      	</div>
-	      	
-	      	<div class="slide">
-	      		<a href="">
-	      			<img src="image/brand/brands_logo.png">
-	      		</a>	
-	      	</div>
-	      	
-	      	<div class="slide">
-	      		<a href="">
-	      			<img src="image/brand/acer_logo.png">
-	      		</a>
-	      	</div>
-	      	
-	      	<div class="slide">
-	      		<a href="">
-	      			<img src="image/brand/bella_logo.png">
-	      		</a>
-	      	</div>
-	      	
-	      	<div class="slide">
-	      		<a href="">
-	      			<img src="image/brand/ariel_logo.png">
-	      		</a>
-	      	</div>
+	     
 	   	</section>
 
 	    <div class="whitespace d-xl-block d-lg-block d-md-none d-sm-none d-none"></div>

@@ -8,7 +8,7 @@
 	//image/category/cat.jpg
 
 	//var_dump($photo);
-	$source_dir='image/category/';
+	$source_dir='image/brand/';
 	if(isset($photo) && $photo['size']>0)
 	{
 		$filename  =  mt_rand(100000,999999);
