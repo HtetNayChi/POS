@@ -6,7 +6,6 @@
 	
 
 	$id=$_GET['id'];
-	$todaydate= date('Y-m-d');
 
 	$active = 0;
 	$role=1;
@@ -26,29 +25,6 @@
 	$user = $statement->fetch(PDO::FETCH_ASSOC);
 
 	//var_dump($user['profile']); die();
-
-
-
-    if(isset($_POST['search'])){
-        $startdate= $_POST['startDate'];
-        $enddate=$_POST['endDate'];
-
-        $sql='SELECT orders.* 
-            FROM orders 
-            INNER JOIN users 
-            ON orders.user_id=users.id
-            WHERE users.status=:v1
-            AND orders.orderdate BETWEEN :v2 and :v3
-            ORDER BY created_at DESC';
-
-
-
-    $statement = $pdo->prepare($sql);
-    $statement->bindParam(':v1',$active);
-    $statement->bindParam(':v2',$startdate);
-    $statement->bindParam(':v3',$enddate);
-    $statement->execute();
-    $orders=$statement->fetchAll();
     
    
 ?>
@@ -77,7 +53,6 @@
                                  </div>
                                  <div class="col-sm-8 mx-4 px-4">
                                  	<div class="form-group row my-1 mb-3 ">
-
                                 	<label for="user_id" class="col-sm-4 col-form-label "> ID : </label>
                                 	<div class="col-sm-6">
                                 		<label for="user_id" class="col-sm-2 col-form-label"> <?=$user['id'] ?>&nbsp;&nbsp;(<?=$user['rname'] ?>) </label>
