@@ -1,6 +1,42 @@
 <?php 
-	require 'frontendheader.php';
+require 'frontendheader.php';
+	if(isset($_SESSION['login_user'])){
+	if($_SESSION['login_user']['rname']=='Admin'){
+	?>			
+
+	
+				<div class="col-3"></div>
+
+				<div class="container my-5">
+
+  				<div class="row mt-5">
+    				<div class="col-lg-3 col-sm-1"></div>
+    				<div class="col ">
+      				<div class="alert alert-danger d-flex align-items-center pr-5 " role="alert">
+							 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+							  <div style="border: 1px solid red; border-radius:5px;" class="my-3 px-4">
+							    <h3 class="my-4"> Sorry  😣😣 <br></h3>
+							    <hr>
+							    <p>Dear : <?=$_SESSION['login_user']['name']?></p>
+							    <p>You are Admin.<br> You cannot Get into Customer Side with this Account. </p><br>
+
+							    <div class="my-3">
+							    <a href="view.php"  class="btn btn-secondary mainfullbtncolor btn-block text-decoration-none ">View</a>
+							    <br>
+							    
+							    <a href="dashboard.php" class="btn btn-secondary mainfullbtncolor btn-block text-decoration-none">Back To Dashboard</a>
+								</div>
+							  </div>
+							   
+							</div>
+    				</div>
+    				<div class="col-lg-3 col-sm-1"></div>
+  				</div>
+				</div>
+	<?php
+	}}
 	require 'connection.php';
+	
 
 	$sql= 'SELECT * FROM categories order By rand() LIMIT 8';
 	$statement=$pdo->prepare($sql);
@@ -29,6 +65,19 @@
 	$statement=$pdo->prepare($sql);
 	$statement->execute();
 	$brands= $statement->fetchAll();
+
+	$sql = 'SELECT roles.name as rname FROM users 
+			INNER JOIN model_has_roles ON users.id = model_has_roles.user_id
+			INNER JOIN roles ON model_has_roles.role_id = roles.id
+			WHERE users.id=:value1';
+
+	$statement = $pdo->prepare($sql);
+	$statement->bindParam(':value1', $id);
+	$statement->execute();
+	$authuser = $statement->fetch(PDO::FETCH_ASSOC);
+
+
+	
  ?>
 
 
@@ -66,12 +115,14 @@
 				
 			?>
 			<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12 ">
+				<a href="category.php?category_id=<?=$randomcategory_id?>&cname=<?=$randomcategory_name?>" class=" text-decoration-none text-dark"> 
 				<div class="card categoryCard border-0 shadow-sm p-3 mb-5 rounded text-center">
 				  	<img src="<?=$randomcategory_logo ?>" class="card-img-top" alt="..." width="100px" height="150px">
 				  	<div class="card-body">
 				    	<p class="card-text font-weight-bold text-truncate"> <?= $randomcategory_name; ?> </p>
 				  	</div>
 				</div>
+				</a>
 			</div>
 			<?php } ?>
 		</div>
@@ -158,6 +209,7 @@
 						?>
 		                <div class="item">
 		                    <div class="pad15">
+		                    	<a href="item_detail.php?id=<?=$si_id?>" class=" text-decoration-none text-dark">
 		                    	<img src="<?= $si_photo?>" class="img-fluid w-100 " width="200" height="70">
 		                        <p class="text-truncate"><?= $si_name?></p>
 		                        <p class="item-price">
@@ -183,7 +235,7 @@
 								</div>
 
 								<a href="cart.php" class="addtocartBtn  text-decoration-none"data-id="<?= $si_id ?>" data-name="<?= $si_name?>" data-price="<?= $si_price?>" data-discount="<?=$si_discount ?>" data-photo="<?= $si_photo ?>" data-codeno="<?=$si_codeno?>">Add to Cart</a>
-
+							</a>
 		                    </div>
 		                </div>
 		           		<?php 
@@ -218,6 +270,7 @@
 		    
 		                <div class="item">
 		                    <div class="pad15">
+		                    	<a href="item_detail.php?id=<?=$ri_id?>" class=" text-decoration-none text-dark">
 		                    	<img src="<?= $ri_photo ?>" class="img-fluid">
 		                        <p class="text-truncate"><?= $ri_name ?></p>
 		                        <p class="text-truncate">
@@ -242,7 +295,7 @@
 								</div>
 
 								<a href="cart.php" class="addtocartBtn  text-decoration-none"data-id="<?= $ri_id ?>" data-name="<?= $ri_name?>" data-price="<?= $ri_price?>" data-discount="<?=$ri_discount ?>" data-photo="<?= $ri_photo ?>" data-codeno="<?=$ri_codeno?>">Add to Cart</a>
-
+								</a>
 		                    </div>
 		                </div>
 		       			<?php } ?>
@@ -267,11 +320,12 @@
 	    	<?php 
 				foreach($brands as $brand){
 					$randombrand_id=$brand['brand_id'];
+					$randombrand_name=$brand['brand_name'];
 					$randombrand_photo=$brand['logo'];
 				
 			?>
 	      	<div class="slide">
-	      		<a href="">
+	      		<a href="brand.php?id=<?=$randombrand_id?>&name=<?=$randombrand_name?>">
 		      		<img src="<?= $randombrand_photo?>" class="img-fluid">
 		      	</a>
 	      	</div>
@@ -285,5 +339,6 @@
 
 	</div>
 <?php 
+	
 	require 'frontendfooter.php';
  ?>

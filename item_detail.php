@@ -103,7 +103,7 @@
 
 
 				
-				<a href="cart.php" class="addtocartBtn  text-decoration-none"data-id="<?= $items['id'] ?>" data-name="<?= $items['name'] ?> " data-price="<?= $items['price'] ?> " data-discount="<?= $items['discount'] ?> " data-photo="<?= $items['photo'] ?> " data-codeno="<?= $items['codeno'] ?> ">
+				<a href="cart.php?" class="addtocartBtn  text-decoration-none"data-id="<?= $items['id'] ?>" data-name="<?= $items['name'] ?> " data-price="<?= $items['price'] ?> " data-discount="<?= $items['discount'] ?> " data-photo="<?= $items['photo'] ?> " data-codeno="<?= $items['codeno'] ?> ">
 
 					<i class="icofont-shopping-cart mr-2"></i>
 

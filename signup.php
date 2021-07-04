@@ -1,5 +1,5 @@
 <?php
-
+	
 	require'connection.php';
 	session_start();
 	$name=$_POST['name'];
@@ -7,10 +7,13 @@
 	$email=$_POST['email'];
 	$password=$_POST['password'];
 	$address=$_POST['address'];
+	$confirm=$_POST['confirm'];
 
 	$status=0;
 	$profile='image/user.png';
 	$roleid=2;
+
+	if($password ==$confirm){
 
 	$sql='INSERT INTO users (name, profile,phone, email, password,address, status) VALUES(:name, :profile,:phone, :email, :password, :address, :status)';
 
@@ -40,6 +43,10 @@
 	$statement->execute();
 	$_SESSION['reg_success']="You have successfully registered. 😇😇 ";
 	header('location:login.php');
+	}
+	}else{
+		$_SESSION['con_fail']="You password and confirm password is not the same😫😫 ";
+	header('location:register.php');
 	}
 
 ?>

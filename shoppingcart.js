@@ -160,6 +160,8 @@ $(document).ready(function(){
 										</td>
 									</tr>`;
 					total += subtotal ++;
+
+
 				});
 
 				$('#shoppingcart_table').html(shoppingcartData);
@@ -175,6 +177,8 @@ $(document).ready(function(){
 			$('.noneshoppingcart_div').show();
 		}
 	}
+
+
 
 	// Add Quantity
 	$('#shoppingcart_table').on('click', '.plus_btn', function(){
@@ -269,5 +273,8 @@ $(document).ready(function(){
 		});
 
 });
-
+	function cartClear(){
+		localStorage.clear();
+	}
+	
 	});

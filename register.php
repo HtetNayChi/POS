@@ -15,6 +15,15 @@
 		<div class="row justify-content-center">
 			<div class="col-8">
 				<form action="signup.php" method="POST">
+                        <?php if(isset($_SESSION['con_fail'])){ ?>
+
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                              <div>
+                                <?= $_SESSION['con_fail']; ?>
+                              </div>
+                            </div> 
+                        <?php }unset($_SESSION['con_fail']);?>
 		      		<div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -46,7 +55,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                               <label class="small mb-1" for="inputConfirmPassword">Confirm Password</label>
-                              <input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" />
+                              <input class="form-control py-4" id="inputConfirmPassword"name="confirm" type="password" placeholder="Confirm password" />
                               <font id="cerror" color="red"></font>
 
                             </div>

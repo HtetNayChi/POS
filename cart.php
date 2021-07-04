@@ -1,5 +1,6 @@
 <?php
 	require 'frontendheader.php'
+	
 ?>
 
 <!-- Subcategory Title -->
@@ -15,7 +16,7 @@
 		<!-- Shopping Cart Div -->
 		<div class="row mt-5 shoppingcart_div">
 			<div class="col-12">
-				<a href="categories" class="btn mainfullbtncolor btn-secondary float-right px-3" > 
+				<a href="index.php" class="btn mainfullbtncolor btn-secondary float-right px-3" > 
 					<i class="icofont-shopping-cart"></i>
 					Continue Shopping 
 				</a>
@@ -40,7 +41,7 @@
 					<tfoot id="shoppingcart_tfoot">
 						<tr>
 							<td colspan="8">
-								<h3 class="text-right"> Total : 46,000 Ks </h3>
+								<h3 class="text-right cartTotal"> Total : </h3>
 							</td>
 						</tr>
 						<tr> 
@@ -75,7 +76,7 @@
 			</div>
 
 			<div class="col-12 mt-5 ">
-				<a href="categories" class="btn btn-secondary mainfullbtncolor px-3" > 
+				<a href="index.php" class="btn btn-secondary mainfullbtncolor px-3" > 
 					<i class="icofont-shopping-cart"></i>
 					Continue Shopping 
 				</a>

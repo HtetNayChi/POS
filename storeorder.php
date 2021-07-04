@@ -13,6 +13,7 @@
 	$voucherno= strtotime(date("Y-m-d h:i:s"));
 
 	$userid=$_SESSION['login_user']['id'];
+	
 
 	$status= '0';
 

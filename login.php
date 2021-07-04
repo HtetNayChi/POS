@@ -37,7 +37,7 @@
 							    <?= $_SESSION['reg_fail']; ?>
 							  </div>
 							</div> 
-						<?php }
+						<?php }unset($_SESSION['reg_fail']); 
 
 						if(isset($_SESSION['reg_success'])){ ?>
 
@@ -47,7 +47,8 @@
 							    <?= $_SESSION['reg_success']; ?>
 							  </div>
 							</div> 
-						<?php } ?>
+						<?php }unset($_SESSION['reg_success']); ?> 
+						
 					
 		      		<div class="form-group">
 		      			<label class="small mb-1" for="inputEmailAddress">Email</label>

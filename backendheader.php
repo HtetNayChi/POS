@@ -1,4 +1,5 @@
 <?php
+    require'connection.php';
     session_start();
 
     if(!isset($_SESSION['login_user'])){
@@ -6,6 +7,17 @@
         header('location:login.php');
        
     }
+    $id=$_SESSION['login_user']['id'];
+    $sql = 'SELECT users.*, roles.name as rname FROM users 
+            INNER JOIN model_has_roles ON users.id = model_has_roles.user_id
+            INNER JOIN roles ON model_has_roles.role_id = roles.id
+            WHERE users.id=:value1';
+
+    $statement = $pdo->prepare($sql);
+    $statement->bindParam(':value1', $id);
+    $statement->execute();
+
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +84,7 @@
                 </a>
                   <ul class="dropdown-menu settings-menu dropdown-menu-right">
                     <li>
-                        <a class="dropdown-item" href="page-user.html">
+                        <a class="dropdown-item" href="user_detail.php">
                             <i class="icofont-ui-user"></i> Profile
                         </a>
                     </li>
@@ -95,10 +107,10 @@
             <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
                 <aside class="app-sidebar">
                   <div class="app-sidebar__user">
-                    <img class="app-sidebar__user-avatar" src="<?= $_SESSION['login_user']['profile']; ?>" width="50" height="45" alt="User Image">
+                    <img class="app-sidebar__user-avatar" src="<?= $user['profile']; ?>" width="50" height="45" alt="User Image">
                     <div>
-                     <a href="user_detail.php?id=<?= $_SESSION['login_user']['id']; ?>" class="app-sidebar__user-name"><?= $_SESSION['login_user']['name']; ?></a>
-                    <p class="app-sidebar__user-designation"><?= $_SESSION['login_user']['rname']; ?></p>
+                     <a href="user_detail.php?id=<?= $_SESSION['login_user']['id']; ?>" class="app-sidebar__user-name"><?= $user['name']; ?></a>
+                    <p class="app-sidebar__user-designation"><?= $user['rname']; ?></p>
                     
                     </div>
 
@@ -170,7 +182,14 @@
                         </span>
                     </a>
                 </li>
-            
+                 <li>
+                    <a class="app-menu__item" href="index.php">
+                        <i class="app-menu__icon icofont-shopify"></i>
+                        <span class="app-menu__label">
+                            View 
+                        </span>
+                    </a>
+                </li>
                 
             </ul>
             </aside>

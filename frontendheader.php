@@ -11,6 +11,8 @@
 	$statement = $pdo->prepare($sql);
 	$statement->execute();
 	$brands = $statement->fetchAll();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -91,23 +93,42 @@
 					</div>
 					<div class="col-lg-4 col-10">
 
-						<?php if(!isset($_SESSION['login_user'])){?>
+
+						<?php 
+
+						if(!isset($_SESSION['login_user'])){?>
 						<a href="login.php" class="d-xl-block d-lg-block d-md-block d-none  text-decoration-none loginLink float-right"> Login | Sign-up </a>
 						
 						<?php } else {?>
-						<div class="dropdown">
-						  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-						   <?= $_SESSION['login_user']['name'];?>
-						  </a>
-
-						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						    <li><a class="dropdown-item" href="#">Profile</a></li>
-						    <li><a class="dropdown-item" href="#">Order History</a></li>
-						    <li><a class="dropdown-item" href="#">Change Password</a></li>
-						    <li><a class="dropdown-item" href="signout.php">Logout</a></li>
-						  </ul>
-						</div>
-					
+						<div class="dropdown py-2 ">
+                    		<a class="app-nav__item ">
+                    			<i class="icofont-user-alt-3 "></i>
+						   		<?= $_SESSION['login_user']['name'];?>
+						  </a>  
+                		</a>
+		                  <ul class="dropdown-menu settings-menu ">
+		                  	<?php if($_SESSION['login_user']['rname']=='Customer'){ ?>
+		                    <li>
+		                        <a class="dropdown-item" href="customer_detail.php?id=<?= $_SESSION['login_user']['id'];?>">
+		                            <i class="icofont-ui-user"></i> &nbsp;Profile
+		                        </a>
+		                    </li>
+		                    <li>
+		                        <a class="dropdown-item" href="order_history.php">
+		                           <i class="icofont-history"></i>&nbsp;
+		                            Order History
+		                        </a>
+		                    </li>
+		                <?php }?>
+		                    
+		                    <li>
+		                        <a class="dropdown-item" href="signout.php">
+		                            <i class="logoutbtn icofont-logout"></i>&nbsp;
+		                            Logout
+		                        </a>
+		                    </li>
+		                  </ul>
+                		</div>
 					<?php }?>
 				</div>
 			</div>
@@ -121,16 +142,16 @@
 					<i class="icofont-search"></i>
 				</div>
 
-				<a href="" class="text-decoration-none d-xl-inline d-lg-inline d-md-inline d-sm-none d-none shoppingcartLink"> 
+				<a href="cart.php" class="text-decoration-none d-xl-inline d-lg-inline d-md-inline d-sm-none d-none shoppingcartLink"> 
 					<i class="icofont-shopping-cart"></i> 
 					<span class="badge badge-pill badge-light badge-notify cartNotistyle cartNoti"> 1 </span>
-					<span> 4,800 Ks </span>
+					<span class="cartTotal"> 0 Ks </span>
 				</a>
 
-				<a href="" class="text-decoration-none d-xl-none d-lg-none d-md-none d-sm-inline-block d-inline-block shoppingcartLink"> 
+				<!-- <a href="cart.php" class="text-decoration-none d-xl-none d-lg-none d-md-none d-sm-inline-block d-inline-block shoppingcartLink"> 
 					<i class="icofont-shopping-cart"></i>
-					<span class="badge badge-pill badge-light badge-notify cartNotistyle cartNoti"> 1 </span>
-				</a>
+					<span class="badge badge-pill badge-light badge-notify cartNotistyle cartTotal"> 1 </span>
+				</a> -->
 
 				<!-- App Download -->
 
@@ -161,7 +182,7 @@
 			        		
 			        	 ?>
 			          	<li class="dropdown-submenu">
-			          		<a class="dropdown-item" href="javascript:void(0)">
+			          		<a class="dropdown-item" href="category.php?category_id=<?=$id?>&cname=<?=$name?>" class=" text-decoration-none text-dark">
 			          			<?= $name; ?>
 			          			<i class="icofont-rounded-right float-right"></i>
 			          		</a>
@@ -184,7 +205,8 @@
 				            				$sname=$subcategory['sub_name'];
 				            	?>
 
-				              	<li><a class="dropdown-item" href="#"><?= $sname; ?></a></li>
+				              	<li><a class="dropdown-item" href="subcategory.php?id=<?=$sid?>&name=<?=$sname?>" class=" text-decoration-none text-dark">
+			          			<?= $sname; ?></a></li>
 				              	<?php }  ?>
 				            </ul>
 			          	</li>
@@ -197,7 +219,7 @@
 			</div>
 
 			<div class="col-3">
-				<a href="" class="text-decoration-none text-dark font-weight-bold"> Promotion </a>
+				<a href="discount.php" class="text-decoration-none text-dark font-weight-bold"> Promotion </a>
 			</div>
 			<div class="col-3">
 				<div class="hov-dropdown d-inline-block">
@@ -214,7 +236,7 @@
 			        		
 			        	 ?>
 
-            			<a class="dropdown-item" href="#"><?= $bname ?></a>
+            			<a class="dropdown-item" href="brand.php?id=<?=$bid?>&name=<?=$bname?>"><?= $bname ?></a>
             			<div class="dropdown-divider"></div>
             			<?php } ?>
           			</div>
@@ -234,7 +256,7 @@
             			</a>
             			<div class="dropdown-divider"></div>
             			
-            			<a class="dropdown-item" href="#">
+            			<a class="dropdown-item" href="cart.php">
             				Order
             			</a>
             			<div class="dropdown-divider"></div>
@@ -263,7 +285,7 @@
 	<div id="mySidebar" class="sidebar">
 		<div class="row">
 			<div class="col-10">
-	  			<img src="logo/logo_med_trans.png" class="img-fluid" style="width: 100px">
+	  			<img src="image/logo/logo1.png" class="img-fluid ml-3  " style="width: 100px">
 			</div>
 			<div class="col-2">
 				<a href="javascript:void(0)" class="closebtn text-decoration-none">
@@ -281,6 +303,7 @@
 			        			$name= $category['name'];
 			        		
 			 ?>
+
 		  	<a data-toggle="collapse" href="#category<?= $id; ?>" role="button" aria-expanded="false" aria-controls="category">
 		   		<?= $name; ?>
 		   		<i class="icofont-rounded-down float-right mr-3"></i>
@@ -301,7 +324,7 @@
 				            	?>
 
 
-			    <a href="" class="py-2"> <?= $sname; ?> </a>
+			    <a href="subcategory.php?id=<?=$sid?>&name=<?=$sname?>" class="py-2"> <?= $sname; ?> </a>
 				<?php } ?>
 			</div>
 
@@ -325,7 +348,7 @@
 
 			      ?>
 
-			      <a href="" class="py-2"><?= $bname; ?> </a>
+			      <a href="brand.php?id=<?=$bid?>&name=<?=$bname?>" class="py-2"><?= $bname; ?> </a>
 
 			     <?php } ?>
 			 	</div>
@@ -352,10 +375,10 @@
 			<a href="#"> Cart [ <span class="cartNoti"> 1 </span> ]  </a>
 			<hr>
 
-			<img src="frontend/image/download.png" class="img-fluid ml-2 text-center" style="width: 150px">
+			<img src="image/logo/download2.png" class="img-fluid ml-5 pl-2 text-center" style="width: 150px">
 			<hr>
 
-			<p class="text-white ml-3"> Copyright &copy; <img src="../logo/logo_wh_transparent.png" style="width: 20px; height: 20px"> 2019  </p>
+			<p class="text-white ml-3"> Copyright &copy;  2019  </p>
 
 		</div>
 	  	
